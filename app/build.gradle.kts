@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.safe.args)
     alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.android.hilt)
 }
 
 android {
@@ -67,6 +68,13 @@ dependencies {
     implementation(libs.gson)
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.gson)
+    implementation(libs.okhttp.logging)
+
     //glide
     implementation(libs.glide)
+    //hilt
+    implementation(libs.android.hilt)
+    kapt(libs.android.hilt.compiler)
+
+
 }
