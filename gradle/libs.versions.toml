@@ -21,6 +21,8 @@ navigationFragmentKtx = "2.9.3"
 navigationUiKtx = "2.9.3"
 room_version = "2.7.2"
 kapt = "2.2.10"
+hilt = "2.57.1"
+okhttp = "5.1.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -54,6 +56,10 @@ androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
+okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
+
+android-hilt = { group ="com.google.dagger", name ="hilt-android", version.ref="hilt"}
+android-hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -61,4 +67,4 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 safe-args = {id = "androidx.navigation.safeargs.kotlin", version.ref ="nav_version"}
 #kapt
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kapt"}
-
+android-hilt = { id = "com.google.dagger.hilt.android", version.ref= "hilt"}
