@@ -9,3 +9,11 @@ fun MealDto.toDomain() = Meal(
     category = strCategory,
     thumbUrl = strMealThumb
 )
+fun MealDto.toDetail() = MealDetail(
+    id = idMeal,
+    name = strMeal,
+    category = strCategory,
+    thumbUrl = strMealThumb,
+    instructions = strInstructions,
+    youtubeUrl = strYoutube
+)
