@@ -1,10 +1,11 @@
-package com.example.recipeapp.ui
+package com.example.recipeapp.ui.search
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -45,7 +46,9 @@ class MealAdapter(
             .into(holder.recipeImage)
 
         holder.cardRoot.setOnClickListener {
-            // TODO: will replace with real directions the recipe details fragment later.
+            val action = SearchFragmentDirections
+                .actionSearchFragmentToRecipeDetailFragment(meal.id) // meal.id is String
+            it.findNavController().navigate(action)
             // Example (adjust to your nav graph):
             // val action = SearchFragmentDirections
             //     .actionSearchFragmentToRecipeDetailFragment(

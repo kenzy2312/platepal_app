@@ -1,4 +1,4 @@
-package com.example.recipeapp.ui
+package com.example.recipeapp.ui.search
 
 import android.os.Bundle
 import android.view.View
@@ -15,6 +15,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipeapp.R
 import com.example.recipeapp.app.RecipeApp
+import com.example.recipeapp.ui.search.MealAdapter
+import com.example.recipeapp.ui.search.SearchUiState
+import com.example.recipeapp.ui.search.SearchViewModel
 import kotlinx.coroutines.launch
 
 class SearchFragment : Fragment(R.layout.fragment_search) {
