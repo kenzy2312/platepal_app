@@ -1,8 +1,8 @@
 package com.example.recipeapp.data.repository
 
 import com.example.recipeapp.data.domain.MealDetail
-import com.example.recipeapp.db.FavoriteMealEntity
-import com.example.recipeapp.db.FavoritesDao
+import com.example.recipeapp.Database.FavoriteMealEntity
+import com.example.recipeapp.Database.FavoritesDao
 
 class FavoritesRepositoryImpl(private val dao: FavoritesDao): FavoritesRepository {
     override suspend fun isFavorite(id: String) = dao.get(id) != null

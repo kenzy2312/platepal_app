@@ -8,4 +8,10 @@
     <string name="login">Login</string>
     <string name="Register">Click Here To Register</string>
     <string name="emaillogin">Enter Email</string>
+    <string name="show_full_recipe">Full recipe</string>
+    <string name="favorite">Favorite</string>
+    <string name="play_video">Video</string>
+    <string name="hide_full_recipe">Hide full recipe</string>
+    <string name="remove_favorite">Remove Favourite</string>
+    <string name="close">Close</string>
 </resources>

@@ -4,11 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.recipeapp.Database.FavoriteMealEntity
 
-@Database(entities = [User::class], version = 1, exportSchema = false)
+@Database(entities = [User::class, FavoriteMealEntity::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun userDao(): UserDao
+    abstract fun favoritesDao(): FavoritesDao
 
     companion object {
         @Volatile
@@ -16,13 +18,12 @@ abstract class AppDatabase : RoomDatabase() {
 
         fun getDatabase(context: Context): AppDatabase {
             return INSTANCE ?: synchronized(this) {
-                val instance = Room.databaseBuilder(
+                INSTANCE ?: Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
                     "app_database"
                 ).build()
-                INSTANCE = instance
-                instance
+                .also{ INSTANCE = it }
             }
         }
     }

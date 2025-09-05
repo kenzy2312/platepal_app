@@ -1,4 +1,4 @@
-package com.example.recipeapp.db
+package com.example.recipeapp.Database
 
 import androidx.room.Dao
 import androidx.room.Delete
@@ -11,7 +11,7 @@ interface FavoritesDao {
     @Query("SELECT * FROM favorite_meals WHERE id = :id")
     suspend fun get(id: String): FavoriteMealEntity?
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.Companion.REPLACE)
     suspend fun insert(entity: FavoriteMealEntity)
 
     @Delete

@@ -1,6 +1,7 @@
-package com.example.recipeapp.ui
+package com.example.recipeapp.ui.search
 
 import com.example.recipeapp.data.domain.Meal
+import com.example.recipeapp.ui.search.SearchUiState
 import kotlinx.coroutines.flow.StateFlow
 
 interface ISearchViewModel {

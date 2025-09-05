@@ -3,4 +3,32 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="purple">#9C27B0</color>
+
+    <color name="md_theme_light_primary">#1A7F5A</color>     <!-- Emerald -->
+    <color name="md_theme_light_onPrimary">#FFFFFF</color>
+    <color name="md_theme_light_secondary">#FF7A2F</color>   <!-- Warm Orange -->
+    <color name="md_theme_light_onSecondary">#FFFFFF</color>
+    <color name="md_theme_light_tertiary">#6C54A3</color>    <!-- Plum -->
+    <color name="md_theme_light_onTertiary">#FFFFFF</color>
+
+    <color name="md_theme_light_surface">#FFFBFE</color>
+    <color name="md_theme_light_onSurface">#1C1B1F</color>
+    <color name="md_theme_light_surfaceVariant">#E8E0EC</color>
+    <color name="md_theme_light_onSurfaceVariant">#49454F</color>
+    <color name="md_theme_light_outline">#7A757F</color>
+
+
+    <color name="md_theme_dark_primary">#5AD0AA</color>
+    <color name="md_theme_dark_onPrimary">#003828</color>
+    <color name="md_theme_dark_secondary">#FF9E66</color>
+    <color name="md_theme_dark_onSecondary">#4E2600</color>
+    <color name="md_theme_dark_tertiary">#BDA7FF</color>
+    <color name="md_theme_dark_onTertiary">#2B1B5A</color>
+
+    <color name="md_theme_dark_surface">#151218</color>
+    <color name="md_theme_dark_onSurface">#E6E0E9</color>
+    <color name="md_theme_dark_surfaceVariant">#49454F</color>
+    <color name="md_theme_dark_onSurfaceVariant">#CAC4D0</color>
+    <color name="md_theme_dark_outline">#938F99</color>
+
 </resources>
