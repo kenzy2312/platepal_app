@@ -49,14 +49,7 @@ class MealAdapter(
             val action = SearchFragmentDirections
                 .actionSearchFragmentToRecipeDetailFragment(meal.id) // meal.id is String
             it.findNavController().navigate(action)
-            // Example (adjust to your nav graph):
-            // val action = SearchFragmentDirections
-            //     .actionSearchFragmentToRecipeDetailFragment(
-            //         mealId = meal.id,
-            //         mealName = meal.name,
-            //         mealThumbUrl = meal.thumbUrl ?: ""
-            //     )
-            // it.findNavController().navigate(action)
+            
         }
     }
 
