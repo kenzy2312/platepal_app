@@ -15,4 +15,18 @@
     <string name="remove_favorite">Remove Favourite</string>
     <string name="close">Close</string>
     <string name="meal_name">Meal Name</string>
+
+    <string name="about_text">
+        This application is designed to make your cooking journey easier and more enjoyable. \n\n
+        With our app, you can:\n
+        - Search for any meal recipe with clear step-by-step instructions.\n
+        - Get smart suggestions for random meals when you don’t know what to cook.\n
+        - Discover recipes from different cuisines around the world.\n
+        - Save your favorite meals and revisit them anytime.\n\n
+        Our goal is to help you explore, cook, and enjoy delicious dishes effortlessly.\n\n
+        Developed with passion by:\n
+        - Kenzy Ashraf – kenzy2312\n
+        - Menna Alaa – MennaT-T\n
+        - Karim Hossam – Denzyy1
+    </string>
 </resources>
