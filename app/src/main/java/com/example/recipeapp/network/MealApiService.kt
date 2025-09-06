@@ -24,4 +24,10 @@ interface MealApiService {
 
     @GET("lookup.php")
     suspend fun getById(@Query("i") id: String): Response<MealsResponseDto>
+    @GET("random.php")
+    suspend fun getRandomMeal(): MealsResponseDto
+
+    @GET("search.php?s=")
+    suspend fun getAllMeals(): MealsResponseDto
+
 }

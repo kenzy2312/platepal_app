@@ -11,7 +11,7 @@ import com.example.recipeapp.ui.SearchViewModelFactory
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-
+import com.example.recipeapp.ui.HomeViewModelFactory
 class AppContainer {
 
     private val okHttp: OkHttpClient by lazy {
@@ -43,4 +43,6 @@ class AppContainer {
     }
 
     fun provideSearchViewModelFactory() = SearchViewModelFactory(searchMeals)
+    fun provideHomeViewModelFactory() = HomeViewModelFactory(repository)
+
 }

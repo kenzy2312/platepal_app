@@ -11,14 +11,15 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.recipeapp.R
 import com.example.recipeapp.data.domain.Meal
 
-class MealAdapter(
-    private val meals: MutableList<Meal>
-) : RecyclerView.Adapter<MealAdapter.MealViewHolder>() {
+class MealsAdapter(
+    private val meals: MutableList<Meal>,
+    private val onFavoriteClick: (Meal) -> Unit
+) : RecyclerView.Adapter<MealsAdapter.MealViewHolder>() {
 
     class MealViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val recipeName: TextView = view.findViewById(R.id.tvRecipeName)
+        val recipeName: TextView = view.findViewById(R.id.txtMeal)
         val recipeCategory: TextView = view.findViewById(R.id.tvRecipeCategory)
-        val recipeImage: ImageView = view.findViewById(R.id.ivRecipeImage)
+        val recipeImage: ImageView = view.findViewById(R.id.imgSuggestedMeal)
         val cardRoot: View = view.findViewById(R.id.cardRoot)
     }
 
@@ -47,13 +48,13 @@ class MealAdapter(
         holder.cardRoot.setOnClickListener {
             // TODO: will replace with real directions the recipe details fragment later.
             // Example (adjust to your nav graph):
-            // val action = SearchFragmentDirections
-            //     .actionSearchFragmentToRecipeDetailFragment(
-            //         mealId = meal.id,
-            //         mealName = meal.name,
-            //         mealThumbUrl = meal.thumbUrl ?: ""
-            //     )
-            // it.findNavController().navigate(action)
+             val action = SearchFragmentDirections
+                 .actionSearchFragmentToRecipeDetailFragment(
+                     mealId = meal.id,
+                     mealName = meal.name,
+                     mealThumbUrl = meal.thumbUrl ?: ""
+                 )
+             it.findNavController().navigate(action)
         }
     }
 

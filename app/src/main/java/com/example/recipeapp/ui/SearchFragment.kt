@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.recipeapp.R
 import com.example.recipeapp.app.RecipeApp
 import kotlinx.coroutines.launch
+import com.example.recipeapp.data.FavoritesManager
 
 class SearchFragment : Fragment(R.layout.fragment_search) {
 
@@ -29,7 +30,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             .container.provideSearchViewModelFactory()
     }
 
-    private lateinit var adapter: MealAdapter
+    private lateinit var adapter: MealsAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -39,7 +40,10 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         progress = view.findViewById(R.id.progress)
         empty = view.findViewById(R.id.empty)
 
-        adapter = MealAdapter(mutableListOf())
+        adapter = MealsAdapter(mutableListOf()) { meal ->
+
+            FavoritesManager.addMeal(meal)
+        }
         rvResults.layoutManager = LinearLayoutManager(requireContext())
         rvResults.adapter = adapter
 

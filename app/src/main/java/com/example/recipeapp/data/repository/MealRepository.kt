@@ -4,4 +4,6 @@ import com.example.recipeapp.data.domain.Meal
 
 interface MealRepository {
     suspend fun search(query: String): List<Meal>
+    suspend fun getRandomMeal(): Meal
+    suspend fun getAllMeals(): List<Meal>
 }
