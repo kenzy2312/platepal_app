@@ -4,24 +4,27 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.recipeapp.R
 import com.example.recipeapp.app.RecipeApp
 import com.example.recipeapp.data.FavoritesManager
 import com.example.recipeapp.data.domain.Meal
-import com.example.recipeapp.databinding.FragmentHomeBinding
-import androidx.navigation.fragment.findNavController
 
 class HomeFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
-
     private lateinit var adapter: MealsAdapter
     private val meals = mutableListOf<Meal>()
+
+    private lateinit var rvMeals: RecyclerView
+    private lateinit var txtSuggestedMeal: TextView
+    private lateinit var imgSuggestedMeal: ImageView
 
     private val homeViewModel: HomeViewModel by viewModels {
         (requireActivity().application as RecipeApp)
@@ -32,30 +35,34 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        return binding.root
+        // Inflate layout directly
+        return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val navController = findNavController()
 
+        // Initialize views using findViewById
+        rvMeals = view.findViewById(R.id.rvMeals)
+        txtSuggestedMeal = view.findViewById(R.id.txtSuggestedMeal)
+        imgSuggestedMeal = view.findViewById(R.id.imgSuggestedMeal)
+
         // Adapter for RecyclerView
         adapter = MealsAdapter(meals) { meal: Meal ->
             FavoritesManager.addMeal(meal)
         }
 
-
-        binding.rvMeals.layoutManager =
+        rvMeals.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.rvMeals.adapter = adapter
+        rvMeals.adapter = adapter
 
         // Observe Suggested Meal
         homeViewModel.randomMeal.observe(viewLifecycleOwner) { meal ->
-            binding.txtSuggestedMeal.text = meal.name
-            Glide.with(binding.imgSuggestedMeal)
+            txtSuggestedMeal.text = meal.name
+            Glide.with(imgSuggestedMeal)
                 .load(meal.thumbUrl)
-                .into(binding.imgSuggestedMeal)
+                .into(imgSuggestedMeal)
         }
 
         // Observe Meals List
@@ -68,10 +75,5 @@ class HomeFragment : Fragment() {
         // Fetch Data from API
         homeViewModel.fetchRandomMeal()
         homeViewModel.fetchAllMeals()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

@@ -6,44 +6,39 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.recipeapp.R
 import com.example.recipeapp.data.FavoritesManager
-import com.example.recipeapp.databinding.FragmentFavoriteBinding
 
 class FavoritesFragment : Fragment() {
 
-    private var _binding: FragmentFavoriteBinding? = null
-    private val binding get() = _binding!!
-
     private lateinit var adapter: MealsAdapter
+    private lateinit var rvFavorites: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
-        return binding.root
+        // Inflate the layout directly instead of using binding
+        return inflater.inflate(R.layout.fragment_favorite, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val favorites = FavoritesManager.getFavorites().toMutableList()
+        // Find RecyclerView by ID
+        rvFavorites = view.findViewById(R.id.rvFavorites)
 
+        val favorites = FavoritesManager.getFavorites().toMutableList()
 
         adapter = MealsAdapter(favorites) { meal ->
             FavoritesManager.removeMeal(meal)
             favorites.remove(meal)
             adapter.notifyDataSetChanged()
-
         }
 
-        binding.rvFavorites.layoutManager =
+        rvFavorites.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        binding.rvFavorites.adapter = adapter
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        rvFavorites.adapter = adapter
     }
 }

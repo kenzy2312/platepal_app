@@ -23,7 +23,6 @@ class HomeViewModel(
                 val meal = repository.getRandomMeal()
                 _randomMeal.postValue(meal)
             } catch (e: Exception) {
-                // ممكن تحطي قيمة افتراضية أو خطأ هنا
                 e.printStackTrace()
             }
         }
