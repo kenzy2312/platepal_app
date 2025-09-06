@@ -7,4 +7,6 @@ interface MealRepository {
     suspend fun search(query: String): List<Meal>
     suspend fun detail(id: String): MealDetail
 
+    suspend fun getRandomMeal(): Meal
+    suspend fun getAllMeals(): List<Meal>
 }

@@ -73,45 +73,104 @@
                     android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
             </LinearLayout>
 
-            <!-- Buttons row: same textAppearance for consistent sizing -->
+            <!-- Actions row: icon-only + label under each -->
             <LinearLayout
+                android:id="@+id/actionsRow"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
+                android:gravity="center"
                 android:orientation="horizontal">
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnExpand"
-                    style="@style/Widget.Material3.Button.TonalButton"
+                <!-- Expand action -->
+                <LinearLayout
+                    android:id="@+id/actionExpand"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/show_full_recipe"
-                    android:textAppearance="@style/TextAppearance.Material3.LabelLarge" />
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnFavorite"
-                    style="@style/Widget.Material3.Button.TonalButton"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:layout_weight="1"
-                    android:text="@string/favorite"
-                    android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
-                    app:icon="@drawable/outline_bookmark_heart_24"
-                    app:iconPadding="2dp" />
+                    <ImageButton
+                        android:id="@+id/btnExpand"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:contentDescription="@string/show_full_recipe"
+                        android:padding="8dp"
+                        android:src="@drawable/outline_align_flex_center_24"
+                        android:tint="?attr/colorOnSurface" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnPlayVideo"
-                    style="@style/Widget.Material3.Button.TonalButton"
+                    <TextView
+                        android:id="@+id/labelExpand"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/show_full_recipe"
+                        android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
+                        android:textColor="?attr/colorOnSurfaceVariant" />
+                </LinearLayout>
+
+                <!-- Favorite action -->
+                <LinearLayout
+                    android:id="@+id/actionFavorite"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
                     android:layout_weight="1"
-                    android:text="@string/play_video"
-                    android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
-                    app:icon="@drawable/outline_auto_read_play_24" />
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/btnFavorite"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:padding="8dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:contentDescription="@string/favorite"
+                        android:src="@drawable/ic_favorite"
+                        android:tint="?attr/colorOnSurface" />
+
+                    <TextView
+                        android:id="@+id/labelFavorite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/favorite"
+                        android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
+                        android:textColor="?attr/colorOnSurfaceVariant" />
+                </LinearLayout>
+
+                <!-- Play video action -->
+                <LinearLayout
+                    android:id="@+id/actionPlay"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/btnPlayVideo"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:padding="8dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:contentDescription="@string/play_video"
+                        android:src="@drawable/outline_auto_read_play_24"
+                        android:tint="?attr/colorOnSurface" />
+
+                    <TextView
+                        android:id="@+id/labelPlay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/play_video"
+                        android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
+                        android:textColor="?attr/colorOnSurfaceVariant" />
+                </LinearLayout>
+
             </LinearLayout>
+
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

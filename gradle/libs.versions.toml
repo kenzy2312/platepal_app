@@ -72,5 +72,3 @@ safe-args = {id = "androidx.navigation.safeargs.kotlin", version.ref ="nav_versi
 #kapt
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kapt"}
 android-hilt = { id = "com.google.dagger.hilt.android", version.ref= "hilt"}
-
-

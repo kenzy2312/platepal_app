@@ -14,4 +14,5 @@
     <string name="hide_full_recipe">Hide full recipe</string>
     <string name="remove_favorite">Remove Favourite</string>
     <string name="close">Close</string>
+    <string name="meal_name">Meal Name</string>
 </resources>

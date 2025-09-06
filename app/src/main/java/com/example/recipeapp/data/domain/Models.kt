@@ -5,7 +5,8 @@ data class Meal(
     val id: String,
     val name: String,
     val category: String?,
-    val thumbUrl: String?
+    val thumbUrl: String?,
+    var isFavorite: Boolean = false
 )
 
 data class Category(

@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.recipeapp.data.domain.GetMealDetail
 import com.example.recipeapp.data.repository.FavoritesRepository
-import com.example.recipeapp.ui.detail.RecipeDetailViewModel
 
 class DetailViewModelFactory (
     private val mealDetail: GetMealDetail,

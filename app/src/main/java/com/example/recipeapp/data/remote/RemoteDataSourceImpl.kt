@@ -27,4 +27,16 @@ class RemoteDataSourceImpl(
             ?: error("Not found")
         return m.toDetail()
     }
+
+    override suspend fun getRandomMeal(): Meal {
+        val dto = api.getRandomMeal()
+        val mealDto = dto.meals?.firstOrNull()
+            ?: throw Exception("No random meal found")
+        return mealDto.toDomain()
+    }
+
+    override suspend fun getAllMeals(): List<Meal> {
+        val dto = api.getAllMeals()
+        return dto.meals?.map { it.toDomain() } ?: emptyList()
+    }
 }
