@@ -3,9 +3,9 @@ package com.example.recipeapp.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -13,13 +13,16 @@ import com.example.recipeapp.R
 import com.example.recipeapp.data.domain.Meal
 
 class MealAdapter(
-    private val meals: MutableList<Meal>
+    private val meals: MutableList<Meal>,
+    private val onItemClick: (Meal) -> Unit,
+    private val onFavoriteClick: (Meal) -> Unit
 ) : RecyclerView.Adapter<MealAdapter.MealViewHolder>() {
 
     class MealViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val recipeName: TextView = view.findViewById(R.id.tvRecipeName)
         val recipeCategory: TextView = view.findViewById(R.id.tvRecipeCategory)
         val recipeImage: ImageView = view.findViewById(R.id.ivRecipeImage)
+        val btnFavorite: ImageButton = view.findViewById(R.id.btnFavorite)
         val cardRoot: View = view.findViewById(R.id.cardRoot)
     }
 
@@ -45,12 +48,19 @@ class MealAdapter(
             )
             .into(holder.recipeImage)
 
-        holder.cardRoot.setOnClickListener {
-            val action = SearchFragmentDirections
-                .actionSearchFragmentToRecipeDetailFragment(meal.id) // meal.id is String
-            it.findNavController().navigate(action)
+        holder.btnFavorite.isClickable = true
+        holder.btnFavorite.isFocusable = true
 
-        }
+        val isFav = meal.isFavorite
+        holder.btnFavorite.setImageResource(
+            if (isFav) R.drawable.ic_favorite else R.drawable.ic_favorite_border
+        )
+        holder.btnFavorite.setOnClickListener { onFavoriteClick(meal)
+            // Optimistically flip UI state
+            meal.isFavorite = !meal.isFavorite
+            notifyItemChanged(position) }
+
+        holder.cardRoot.setOnClickListener { onItemClick(meal) }
     }
 
     override fun getItemCount(): Int = meals.size

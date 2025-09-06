@@ -36,7 +36,7 @@ class RemoteDataSourceImpl(
     }
 
     override suspend fun getAllMeals(): List<Meal> {
-        val dto = api.getAllMeals() // make sure this endpoint exists in MealApiService
+        val dto = api.getAllMeals()
         return dto.meals?.map { it.toDomain() } ?: emptyList()
     }
 }

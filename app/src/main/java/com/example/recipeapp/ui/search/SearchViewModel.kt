@@ -4,7 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.recipeapp.data.domain.Meal
 import com.example.recipeapp.data.domain.SearchMeals
-import kotlinx.coroutines.Job
+import com.example.recipeapp.data.repository.FavoritesRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -14,19 +15,19 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 
 class SearchViewModel(
-    private val searchMeals: SearchMeals
+    private val searchMeals: SearchMeals,
+    private val favoritesRepo: FavoritesRepository
 ) : ViewModel(), ISearchViewModel {
 
     private val _query = MutableStateFlow("")
     private val _ui = MutableStateFlow<SearchUiState>(SearchUiState.Idle)
     override val uiState: StateFlow<SearchUiState> = _ui.asStateFlow()
 
-    private var currentSearchJob: Job? = null
 
     init {
         viewModelScope.launch {
             _query
-                .debounce(300)               // user types; wait 300ms of silence
+                .debounce(300)               // user types, wait 300ms
                 .distinctUntilChanged()
                 .collectLatest { q ->
                     if (q.isBlank()) {
@@ -48,8 +49,10 @@ class SearchViewModel(
     override fun onQueryChanged(query: String) {
         _query.value = query
     }
-
-    override fun onResultClicked(meal: Meal) {
-        // No-op here; Fragment decides navigation target later.
+    fun toggleFavorite(meal: Meal) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val newIsFav = favoritesRepo.toggle(meal)
+            meal.isFavorite = newIsFav
+        }
     }
 }

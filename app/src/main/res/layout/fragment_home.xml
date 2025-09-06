@@ -1,5 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -21,7 +22,8 @@
                 android:id="@+id/imgSuggestedMeal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                tools:srcCompat="@drawable/placeholder_recipe" />
 
             <TextView
                 android:id="@+id/txtSuggestedMeal"
@@ -29,11 +31,11 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_margin="8dp"
-                android:text="Meal Name"
-                android:textColor="@android:color/white"
-                android:textSize="20sp"
                 android:background="#66000000"
-                android:padding="8dp"/>
+                android:padding="8dp"
+                android:text="@string/meal_name"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 

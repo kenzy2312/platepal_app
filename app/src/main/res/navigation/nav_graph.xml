@@ -6,8 +6,12 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.recipeapp.ui.HomeFragment"
-        android:label="Home" />
+        android:name="com.example.recipeapp.ui.home.HomeFragment"
+        android:label="Home" >
+        <action
+            android:id="@+id/action_homeFragment_to_recipeDetailFragment"
+            app:destination="@id/recipeDetailFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/searchFragment"
@@ -29,7 +33,11 @@
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="com.example.recipeapp.ui.FavoritesFragment"
-        android:label="Favorites" />
+        android:label="Favorites" >
+        <action
+            android:id="@+id/action_favoritesFragment_to_recipeDetailFragment"
+            app:destination="@id/recipeDetailFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/moreFragment"
