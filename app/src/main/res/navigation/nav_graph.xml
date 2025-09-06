@@ -46,6 +46,6 @@
 
     <fragment
         android:id="@+id/aboutFragment"
-        android:name="com.example.recipeapp.ui.AboutFragment"
+        android:name="com.example.recipeapp.ui.more.AboutFragment"
         android:label="About" />
 </navigation>
