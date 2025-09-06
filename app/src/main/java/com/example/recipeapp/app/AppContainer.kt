@@ -14,10 +14,10 @@ import com.example.recipeapp.network.MealApiService
 import com.example.recipeapp.ui.Favorite.FavoritesViewModelFactory
 import com.example.recipeapp.ui.detail.DetailViewModelFactory
 import com.example.recipeapp.ui.search.SearchViewModelFactory
+import com.example.recipeapp.ui.home.HomeViewModelFactory
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import com.example.recipeapp.ui.home.HomeViewModelFactory
 
 class AppContainer(private val context: Context) {
 
@@ -52,15 +52,16 @@ class AppContainer(private val context: Context) {
     private val db: AppDatabase by lazy {
         AppDatabase.getDatabase(context)
     }
-    private val favoritesRepo by lazy { FavoritesRepositoryImpl(db.favoritesDao()) }
+    private val sessionManager: SessionManager by lazy {
+        SessionManager(context)
+    }
+    private val favoritesRepo by lazy {
+        FavoritesRepositoryImpl(db.favoritesDao(), sessionManager)
+    }
     private val getMealDetail by lazy { GetMealDetailImpl(repository) }
 
-
     fun provideSearchViewModelFactory() = SearchViewModelFactory(searchMeals, favoritesRepo)
-    fun provideRecipeDetailVMFactory() =
-        DetailViewModelFactory(getMealDetail, favoritesRepo)
-    fun provideFavoritesViewModelFactory(): FavoritesViewModelFactory =
-        FavoritesViewModelFactory(favoritesRepo)
-    fun provideHomeViewModelFactory(): HomeViewModelFactory =
-        HomeViewModelFactory(repository, favoritesRepo)
+    fun provideRecipeDetailVMFactory() = DetailViewModelFactory(getMealDetail, favoritesRepo)
+    fun provideFavoritesViewModelFactory(): FavoritesViewModelFactory = FavoritesViewModelFactory(favoritesRepo)
+    fun provideHomeViewModelFactory(): HomeViewModelFactory = HomeViewModelFactory(repository, favoritesRepo)
 }
