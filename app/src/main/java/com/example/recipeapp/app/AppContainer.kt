@@ -7,12 +7,15 @@ import com.example.recipeapp.data.remote.RemoteDataSourceImpl
 import com.example.recipeapp.data.repository.MealRepository
 import com.example.recipeapp.data.repository.MealRepositoryImpl
 import com.example.recipeapp.network.MealApiService
-import com.example.recipeapp.ui.SearchViewModelFactory
+import com.example.recipeapp.ui.detail.DetailViewModelFactory
+import com.example.recipeapp.ui.search.SearchViewModelFactory
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import com.example.recipeapp.ui.HomeViewModelFactory
 class AppContainer {
+
+class AppContainer(private val context: Context) {
 
     private val okHttp: OkHttpClient by lazy {
         OkHttpClient.Builder().build()
@@ -45,4 +48,13 @@ class AppContainer {
     fun provideSearchViewModelFactory() = SearchViewModelFactory(searchMeals)
     fun provideHomeViewModelFactory() = HomeViewModelFactory(repository)
 
+
+    private val db: AppDatabase by lazy {
+        AppDatabase.getDatabase(context)
+    }
+    private val favoritesRepo by lazy { FavoritesRepositoryImpl(db.favoritesDao()) }
+    private val getMealDetail by lazy { GetMealDetailImpl(repository) }
+
+    fun provideRecipeDetailVMFactory() =
+        DetailViewModelFactory(getMealDetail, favoritesRepo)
 }

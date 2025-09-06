@@ -8,6 +8,6 @@ class RecipeApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        container = AppContainer() // build Retrofit, repos, use cases here
+        container = AppContainer(applicationContext) // build Retrofit, repos, use cases here
     }
 }

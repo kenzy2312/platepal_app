@@ -1,4 +1,4 @@
-package com.example.recipeapp.ui
+package com.example.recipeapp.ui.search
 
 import com.example.recipeapp.data.domain.Meal
 
