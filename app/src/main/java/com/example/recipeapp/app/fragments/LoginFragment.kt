@@ -41,6 +41,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
                 if (user != null) {
                     sessionManager.saveAuthToken(user.username)
+                    sessionManager.saveUserId(user.id)
+
                     Toast.makeText(requireContext(), "Login Successful", Toast.LENGTH_SHORT).show()
 
                     requireActivity().runOnUiThread {
