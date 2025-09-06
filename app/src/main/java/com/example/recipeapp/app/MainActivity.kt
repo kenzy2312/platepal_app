@@ -8,7 +8,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.recipeapp.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.example.recipeapp.ui.MoreBottomSheet
+import com.example.recipeapp.ui.more.MoreBottomSheet
 
 class MainActivity : AppCompatActivity() {
 
