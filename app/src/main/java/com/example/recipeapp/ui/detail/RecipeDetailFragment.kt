@@ -3,6 +3,7 @@ package com.example.recipeapp.ui.detail
 import android.os.Bundle
 import android.view.View
 import android.webkit.WebView
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -14,8 +15,6 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.recipeapp.R
 import com.example.recipeapp.app.RecipeApp
-import com.example.recipeapp.ui.detail.RecipeDetailViewModel
-import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.launch
 
 class RecipeDetailFragment : Fragment(R.layout.fragment_recipe_detail) {
@@ -32,11 +31,14 @@ class RecipeDetailFragment : Fragment(R.layout.fragment_recipe_detail) {
     private lateinit var tvInstructions: TextView
     private lateinit var expandArea: View
     private lateinit var btnExpand: View
-    private lateinit var btnFavorite: MaterialButton
+    private lateinit var btnFavorite: ImageButton
     private lateinit var btnPlayVideo: View
     private lateinit var miniPlayer: View
     private lateinit var webVideo: WebView
     private lateinit var btnCloseVideo: View
+    private lateinit var labelExpand: TextView
+    private lateinit var labelPlay: TextView
+    private lateinit var labelFavorite: TextView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         ivThumb = view.findViewById(R.id.ivThumb)
@@ -50,12 +52,17 @@ class RecipeDetailFragment : Fragment(R.layout.fragment_recipe_detail) {
         miniPlayer = view.findViewById(R.id.miniPlayer)
         webVideo = view.findViewById(R.id.webVideo)
         btnCloseVideo = view.findViewById(R.id.btnCloseVideo)
+        labelExpand = view.findViewById(R.id.labelExpand)
+        labelPlay = view.findViewById(R.id.labelPlay)
+        labelFavorite = view.findViewById(R.id.labelFavorite)
 
         btnExpand.setOnClickListener {
-            expandArea.visibility = if (expandArea.visibility == View.GONE) View.VISIBLE else View.GONE
-            (it as? MaterialButton)?.text =
-                if (expandArea.visibility == View.VISIBLE) getString(R.string.hide_full_recipe)
-                else getString(R.string.show_full_recipe)
+            val expanded = expandArea.visibility == View.VISIBLE
+            expandArea.visibility = if (expanded) View.GONE else View.VISIBLE
+            // Update label + contentDescription
+            labelExpand.text = if (expanded) getString(R.string.show_full_recipe)
+            else getString(R.string.hide_full_recipe)
+            btnExpand.contentDescription = labelExpand.text
         }
 
         btnFavorite.setOnClickListener { vm.toggleFavorite() }
@@ -71,7 +78,7 @@ class RecipeDetailFragment : Fragment(R.layout.fragment_recipe_detail) {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 vm.ui.collect { state ->
                     when (state) {
-                        is DetailUiState.Loading -> { /* show progress if you add one */ }
+                        is DetailUiState.Loading -> { /* show progress */ }
                         is DetailUiState.Loaded -> {
                             val d = state.detail
                             Glide.with(ivThumb).load(d.thumbUrl)
@@ -80,7 +87,7 @@ class RecipeDetailFragment : Fragment(R.layout.fragment_recipe_detail) {
                             tvTitle.text = d.name
                             tvCategory.text = d.category ?: "—"
                             tvInstructions.text = d.instructions ?: "—"
-                            btnFavorite.text =
+                            labelFavorite.text =
                                 if (state.isFavorite) getString(R.string.remove_favorite)
                                 else getString(R.string.favorite)
                             // Prepare video URL for later

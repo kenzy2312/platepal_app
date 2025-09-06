@@ -29,7 +29,7 @@ class RecipeDetailViewModel(
 
     fun toggleFavorite() = viewModelScope.launch {
         val current = _ui.value as? DetailUiState.Loaded ?: return@launch
-        val newFav = favorites.toggleFavorite(current.detail)
+        val newFav = favorites.toggle(current.detail)
         _ui.value = current.copy(isFavorite = newFav)
     }
 }

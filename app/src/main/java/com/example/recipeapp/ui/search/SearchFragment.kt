@@ -11,14 +11,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipeapp.R
 import com.example.recipeapp.app.RecipeApp
-import com.example.recipeapp.ui.search.MealAdapter
-import com.example.recipeapp.ui.search.SearchUiState
-import com.example.recipeapp.ui.search.SearchViewModel
 import kotlinx.coroutines.launch
+import com.example.recipeapp.ui.MealAdapter
 
 class SearchFragment : Fragment(R.layout.fragment_search) {
 
@@ -42,7 +41,17 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         progress = view.findViewById(R.id.progress)
         empty = view.findViewById(R.id.empty)
 
-        adapter = MealAdapter(mutableListOf())
+        adapter = MealAdapter(
+            meals = mutableListOf(),
+            onItemClick = { meal ->
+                val action = SearchFragmentDirections
+                    .actionSearchFragmentToRecipeDetailFragment(meal.id)
+                requireView().findNavController().navigate(action)
+            },
+            onFavoriteClick = { meal ->
+                viewModel.toggleFavorite(meal)
+            }
+        )
         rvResults.layoutManager = LinearLayoutManager(requireContext())
         rvResults.adapter = adapter
 

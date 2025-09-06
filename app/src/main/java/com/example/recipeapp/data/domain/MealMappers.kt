@@ -7,7 +7,8 @@ fun MealDto.toDomain() = Meal(
     id = idMeal,
     name = strMeal,
     category = strCategory,
-    thumbUrl = strMealThumb
+    thumbUrl = strMealThumb,
+    isFavorite = false
 )
 fun MealDto.toDetail() = MealDetail(
     id = idMeal,
