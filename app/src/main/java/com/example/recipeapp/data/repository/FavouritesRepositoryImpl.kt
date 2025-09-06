@@ -4,15 +4,23 @@ import com.example.recipeapp.data.domain.MealDetail
 import com.example.recipeapp.Database.FavoriteMealEntity
 import com.example.recipeapp.Database.FavoritesDao
 import com.example.recipeapp.data.domain.Meal
+import com.example.recipeapp.app.SessionManager
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class FavoritesRepositoryImpl(
-    private val dao: FavoritesDao
+    private val dao: FavoritesDao ,
+    private val sessionManager: SessionManager
 ) : FavoritesRepository {
 
+    private fun currentUserId(): Int {
+        val userId = sessionManager.getUserId()
+        if (userId == -1) throw IllegalStateException("No user logged in")
+        return userId
+    }
+
     override fun favoritesFlow(): Flow<List<Meal>> =
-        dao.observeAll().map { list ->
+        dao.observeAll(currentUserId()).map { list ->
             list.map { e ->
                 Meal(
                     id = e.id,
@@ -24,13 +32,13 @@ class FavoritesRepositoryImpl(
         }
 
     override suspend fun isFavorite(id: String): Boolean =
-        dao.exists(id)
+        dao.exists(id, currentUserId())
 
     // --- Toggle overloads ---
-
     override suspend fun toggle(meal: Meal): Boolean {
-        return if (dao.exists(meal.id)) {
-            dao.deleteById(meal.id)
+        val userId = currentUserId()
+        return if (dao.exists(meal.id, userId)) {
+            dao.deleteById(meal.id, userId)
             false
         } else {
             add(meal)
@@ -39,8 +47,9 @@ class FavoritesRepositoryImpl(
     }
 
     override suspend fun toggle(detail: MealDetail): Boolean {
-        return if (dao.exists(detail.id)) {
-            dao.deleteById(detail.id)
+        val userId = currentUserId()
+        return if (dao.exists(detail.id, userId)) {
+            dao.deleteById(detail.id, userId)
             false
         } else {
             add(detail)
@@ -49,14 +58,14 @@ class FavoritesRepositoryImpl(
     }
 
     // --- Add overloads ---
-
     override suspend fun add(meal: Meal) {
         dao.insert(
             FavoriteMealEntity(
                 id = meal.id,
                 name = meal.name,
                 category = meal.category,
-                thumbUrl = meal.thumbUrl
+                thumbUrl = meal.thumbUrl,
+                userId = currentUserId()
             )
         )
     }
@@ -67,12 +76,13 @@ class FavoritesRepositoryImpl(
                 id = detail.id,
                 name = detail.name,
                 category = detail.category,
-                thumbUrl = detail.thumbUrl
+                thumbUrl = detail.thumbUrl,
+                userId = currentUserId()
             )
         )
     }
 
     override suspend fun removeById(id: String) {
-        dao.deleteById(id)
+        dao.deleteById(id, currentUserId())
     }
 }

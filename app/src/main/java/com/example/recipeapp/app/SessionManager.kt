@@ -10,6 +10,7 @@ class SessionManager(context: Context) {
 
     companion object {
         private const val USERNAME = "username"
+        private const val USER_ID = "user_id"
     }
 
     fun saveAuthToken(username: String) {
@@ -18,6 +19,21 @@ class SessionManager(context: Context) {
 
     fun fetchAuthToken(): String? {
         return prefs.getString(USERNAME, null)
+    }
+
+    fun saveUserId(userId: Int) {
+        prefs.edit().putInt(USER_ID, userId).apply()
+    }
+
+    fun getUserId(): Int {
+        return prefs.getInt(USER_ID, -1)
+    }
+
+    fun saveUserSession(userId: Int, username: String) {
+        prefs.edit()
+            .putInt(USER_ID, userId)
+            .putString(USERNAME, username)
+            .apply()
     }
 
     fun clearSession() {
