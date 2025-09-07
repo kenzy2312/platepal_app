@@ -29,4 +29,6 @@
         - Menna Alaa – MennaT-T\n
         - Karim Hossam – Denzyy1
     </string>
+    <string name="headertxt">What would you like to cook today?</string>
+    <string name="contentDescription">Header image </string>
 </resources>
