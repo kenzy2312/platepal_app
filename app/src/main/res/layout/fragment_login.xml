@@ -10,6 +10,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColorHint="@color/Custom_purple"
         app:startIconDrawable="@drawable/icon_email">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -23,6 +24,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColorHint="@color/Custom_purple"
         app:startIconDrawable="@drawable/icon_password">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -30,7 +32,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textColorLink="@color/Custom_purple" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -38,6 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:backgroundTint="@color/Custom_purple"
         android:text="@string/login" />
 
     <TextView
@@ -46,5 +50,5 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/Register"
-        android:textColor="@color/purple" />
+        android:textColor="@color/dark_blue" />
 </LinearLayout>

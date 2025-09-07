@@ -30,5 +30,7 @@
     <color name="md_theme_dark_surfaceVariant">#49454F</color>
     <color name="md_theme_dark_onSurfaceVariant">#CAC4D0</color>
     <color name="md_theme_dark_outline">#938F99</color>
+    <color name="Custom_purple">#7C28C9</color>
+    <color name="dark_blue">#132C73</color>
 
 </resources>
